@@ -21,9 +21,9 @@
     function createPromise(willSucceed) {
       var deferred = $q.defer();
       if (willSucceed) {
-          deferred.resolve('Completed');
+        deferred.resolve('Completed');
       } else {
-          deferred.reject('Failed');
+        deferred.reject('Failed');
       }
       return deferred.promise;
     }

@@ -10,11 +10,11 @@ angular.module('view2', ['ngRoute'])
   });
 }])
 
-.controller('View2Ctrl', ['Service', '$q', function(Service, $q) {
+.controller('View2Ctrl', ['Service', '$q', '$timeout', function(Service, $q, $timeout) {
 	var vm = this;
 	// Variables
+	var i = 1;
     vm.status1;
-    vm.status2;
     vm.promise1;
 	vm.promise2;
 	vm.promise3;
@@ -22,47 +22,27 @@ angular.module('view2', ['ngRoute'])
 	vm.promise5;
 
     // functions
-    vm.run = run;
+    vm.loop = loop;
 
-	function run() {
-      // Create 5 promises
-      var promises = [];
-      var names = [];
-      for (var i = 1; i <= 5; i++) {
-        var willSucceed = true;
-        if (i == 2) willSucceed = false;
-        promises.push(Service.createPromise(willSucceed));
-      }
-      
-      // Wait for all promises    
-      vm.status1 = 'Waiting';
-      vm.status2 = 'Waiting';
-      vm.promise1 = 'Waiting';
-	  vm.promise2 = 'Waiting';
-	  vm.promise3 = 'Waiting';
-	  vm.promise4 = 'Waiting';
-	  vm.promise5 = 'Waiting';
-      $q.all(promises).then(
-        function() { 
-        	var aux;
-        	for(var i=0; i<promises.length; i++){
-        		aux = i+1;
-        		console.log(promises[i].$$state.value);
-        		vm['promise'+aux] = promises[i].$$state.value;
-        	}
-            vm.status1 = 'Done'; 
-        }, 
-        function() { 
-        	var aux;
-        	for(var i=0; i<promises.length; i++){
-        		aux = i+1;
-        		console.log(promises[i].$$state.value);
-        		vm['promise'+aux] = promises[i].$$state.value;
-        	}
-            vm.status1 = 'Failed'; 
-        }
-      ).finally(function() {
-        vm.status2 = 'Done waiting';
-      });
-    }
+    function loop() {
+    	var aux = 'promise' + i;
+    	vm[aux] = 'Waiting';
+		if (i > 5) {
+			vm.status1 = 'Done!';
+			return;
+		} else {
+			var willSucceed = true;
+	    	if (i == 3) willSucceed = false;
+	    	Service.createPromise(willSucceed)
+	      		.then(function (result) {
+	      			vm[aux] = result;
+	      			i++;
+	      			$timeout(loop, 1000);
+	      		}, function (error) {
+	      			vm[aux] = error;
+	      			i++;
+	      			$timeout(loop, 1000);
+	      		});
+		}
+	}
 }]);
