@@ -48,12 +48,13 @@ angular.module('myApp.view1', ['ngRoute'])
 	        method: 'GET',
 	        url: URL
 	     }).success(function(data){
-	        // With the data succesfully returned, call our callback
-	        console.log(data);
+	        console.log(data); // binary file
 	        vm.imageFromServer = URL;
 	    }).error(function(){
 	        console.log("error");
 	    });
 	}
+
+	
 
 }]);
