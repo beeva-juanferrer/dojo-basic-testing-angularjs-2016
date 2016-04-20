@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.view1', ['ngRoute'])
+angular.module('view1', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/view1', {
@@ -28,6 +28,7 @@ angular.module('myApp.view1', ['ngRoute'])
 	vm.randomIntegerBetween = randomIntegerBetween;
 	vm.initImageWithRandomURL = initImageWithRandomURL;
 	vm.getImageFromServer = getImageFromServer;
+	vm.callJSONPromise = callJSONPromise;
 
 	// vm.getImageFromServer('file1.png');
 
@@ -48,13 +49,29 @@ angular.module('myApp.view1', ['ngRoute'])
 	        method: 'GET',
 	        url: URL
 	     }).success(function(data){
-	        console.log(data); // binary file
+	        console.log(data); // binary output
 	        vm.imageFromServer = URL;
 	    }).error(function(){
 	        console.log("error");
 	    });
 	}
 
-	
+	function callJSONPromise(passFailBoolean) {
+		var deferred = $q.defer();
+		var result = {
+			statusCode: 200,
+			message: 'Promise resolved'
+		};
+		var error = {
+			statusCode: 500,
+			message: 'Promise rejected'
+		};
+		if (passFailBoolean) {
+			deferred.resolve(result);
+		} else {
+			deferred.reject(error);
+		}
+		return deferred.promise;
+	}
 
 }]);
