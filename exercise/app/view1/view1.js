@@ -13,7 +13,7 @@ angular.module('myApp.view1', ['ngRoute'])
 .controller('View1Ctrl', ['$http', '$q', function($http, $q) {
 	// variable declaration
 	var vm = this;
-	var BASE_URL = 'https://www.google.es';
+	var BASE_URL = 'http://c08080de.ngrok.io'; // TODO: volver a generar el día del curso
 	var imageURLs = [
 		'http://blog.mwaysolutions.com/wp-content/uploads/2015/04/anghgjhgular-js1212.png',
 		'https://angular.io/resources/images/logos/angular2/shield-with-beta.png',
@@ -22,10 +22,14 @@ angular.module('myApp.view1', ['ngRoute'])
 		'http://orthocoders.com/images/bdd_cycle.jpg'
 	];
 	vm.image;
+	vm.imageFromServer;
 
 	// public functions
 	vm.randomIntegerBetween = randomIntegerBetween;
 	vm.initImageWithRandomURL = initImageWithRandomURL;
+	vm.getImageFromServer = getImageFromServer;
+
+	// vm.getImageFromServer('file1.png');
 
 	function randomIntegerBetween(min, max) {
 		return Math.floor(Math.random() * (max - min)) + min;
@@ -36,6 +40,20 @@ angular.module('myApp.view1', ['ngRoute'])
 		var index = randomIntegerBetween(0, imageURLs.length - 1);
 		console.log(index);
 		vm.image = imageURLs[index];
+	}
+
+	function getImageFromServer(fileName) {
+		var URL = BASE_URL + '/api/v1/file/' + fileName;
+		$http({
+	        method: 'GET',
+	        url: URL
+	     }).success(function(data){
+	        // With the data succesfully returned, call our callback
+	        console.log(data);
+	        vm.imageFromServer = URL;
+	    }).error(function(){
+	        console.log("error");
+	    });
 	}
 
 }]);
