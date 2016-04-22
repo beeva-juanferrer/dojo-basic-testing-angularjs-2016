@@ -40,22 +40,11 @@ angular.module('view1', ['ngRoute'])
 
 	function initImageWithRandomURL() {
 		var index = randomIntegerBetween(0, vm.imageNames.length - 1);
-		// vm.image = vm.imageNames[index];
-		// vm.getImageFromServer(vm.imageNames[index]);
 		vm.randomImage = makeURL(vm.imageNames[index])
 	}
 
 	function getImageFromServer(fileName) {
 		var URL = makeURL(fileName);
-		// $http({
-	 //        method: 'GET',
-	 //        url: URL
-	 //     }).success(function(data){
-	 //        vm.log(data); // binary output
-	 //        vm.imageFromServer = URL;
-	 //    }).error(function(){
-	 //        vm.log("error");
-	 //    });
 	    $http.get(URL)
 		.then(function(response) {
 			vm.log(response); // binary output
