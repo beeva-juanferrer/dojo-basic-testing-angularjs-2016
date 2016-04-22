@@ -39,7 +39,7 @@ angular.module('view1', ['ngRoute'])
 	}
 
 	function initImageWithRandomURL() {
-		var index = randomIntegerBetween(0, vm.imageNames.length - 1);
+		var index = vm.randomIntegerBetween(0, vm.imageNames.length - 1);
 		vm.randomImage = makeURL(vm.imageNames[index])
 	}
 

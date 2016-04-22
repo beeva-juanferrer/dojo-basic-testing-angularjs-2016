@@ -9,7 +9,7 @@
    *
    */
   angular
-    .module('myApp.service', [])
+    .module('myApp')
     .factory('Service', Service);
 
   Service.$inject = ['$q', '$timeout'];

@@ -1,16 +1,35 @@
 'use strict';
 
-describe('myApp.view1 module', function() {
+describe('Controller: View1Ctrl', function () {
 
-  beforeEach(module('myApp.view1'));
+	var $http, $q, $scope, View1Ctrl;
 
-  describe('view1 controller', function(){
+	beforeEach(function () {
+		module('view1');
 
-    it('should ....', inject(function($controller) {
-      //spec body
-      var view1Ctrl = $controller('View1Ctrl');
-      expect(view1Ctrl).toBeDefined();
-    }));
+		inject(function ($controller, _$rootScope_,	_$http_, _$q_) {
+			$scope = _$rootScope_.$new();
+			$q = _$q_;
+			$http = _$http_;
 
-  });
+			View1Ctrl = $controller('View1Ctrl', {
+				$scope: $scope,
+				$http: $http,
+				$q: $q
+			});
+		});
+
+	});
+
+	describe('initImageWithRandomURL', function() {
+		it('should initialize vm.randomImage with a random image from the list', function () {
+			spyOn(View1Ctrl, 'randomIntegerBetween');
+			spyOn(View1Ctrl, 'initImageWithRandomURL');
+
+			View1Ctrl.initImageWithRandomURL();
+			
+			expect(View1Ctrl.initImageWithRandomURL).toHaveBeenCalled();
+			expect(View1Ctrl.randomIntegerBetween).toHaveBeenCalled();
+		});
+	});
 });
