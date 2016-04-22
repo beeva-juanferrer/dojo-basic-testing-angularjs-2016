@@ -1,4 +1,20 @@
 <p>This is the partial for view 1.</p>
-<button ng-click="vm.initImageWithRandomURL()">Click me!</button><br>
-<img ng-src="{{vm.image}}" ng-if="vm.image.length != 0" style="max-width: 500px;"><br>
-<img ng-src="{{vm.imageFromServer}}" ng-if="vm.imageFromServer.length != 0" style="max-width: 500px;">
+<br>
+<div style="text-align: center">
+	<button ng-click="vm.initImageWithRandomURL()">Set random image</button><br>
+	<img ng-src="{{vm.randomImage}}" ng-if="vm.randomImage.length != 0" style="max-height: 170px;">
+</div>
+<br>
+<br>
+<div style="text-align: center">
+	<label>Select a file to get from the server</label>
+	<div ng-repeat="option in vm.imageNames">
+        <input type="radio" 
+        ng-model="vm.fileName"
+        id="{{$index}}"
+        name="{{$index}}"
+        ng-value="option"
+        ng-click="vm.getImageFromServer(option)"/> <span>{{option}}</span>
+    </div>
+<img ng-src="{{vm.imageFromServer}}" ng-if="vm.imageFromServer.length != 0" style="max-height: 170px;"><br>
+</div>

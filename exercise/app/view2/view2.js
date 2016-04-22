@@ -14,21 +14,30 @@ angular.module('view2', ['ngRoute'])
 	var vm = this;
 	// Variables
 	var i = 1;
-    vm.status1;
-    vm.promise1;
-	vm.promise2;
-	vm.promise3;
-	vm.promise4;
-	vm.promise5;
+    vm.state = undefined;
+    vm.promise1 = undefined;
+	vm.promise2 = undefined;
+	vm.promise3 = undefined;
+	vm.promise4 = undefined;
+	vm.promise5 = undefined;
 
     // functions
     vm.loop = loop;
 
     function loop() {
+    	if (i == 1) {
+	    	vm.state = "Executing...";
+		    vm.promise1 = "Waiting for promise result";
+			vm.promise2 = "Waiting for promise result";
+			vm.promise3 = "Waiting for promise result";
+			vm.promise4 = "Waiting for promise result";
+			vm.promise5 = "Waiting for promise result";
+		}
     	var aux = 'promise' + i;
     	vm[aux] = 'Waiting';
 		if (i > 5) {
-			vm.status1 = 'Done!';
+			vm.state = 'Done!';
+			i = 1;
 			return;
 		} else {
 			var willSucceed = true;

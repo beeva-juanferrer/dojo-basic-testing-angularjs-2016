@@ -13,22 +13,24 @@ angular.module('view1', ['ngRoute'])
 .controller('View1Ctrl', ['$http', '$q', function($http, $q) {
 	// variable declaration
 	var vm = this;
-	var BASE_URL = 'http://c08080de.ngrok.io'; // TODO: volver a generar el día del curso
-	var imageURLs = [
-		'http://blog.mwaysolutions.com/wp-content/uploads/2015/04/anghgjhgular-js1212.png',
-		'https://angular.io/resources/images/logos/angular2/shield-with-beta.png',
-		'http://static1.squarespace.com/static/513914cde4b0f86e34bbb954/513e41b5e4b03d54a0792254/549b12dfe4b0f04436697032/1423595449235/?format=1000w',
-		'https://pbs.twimg.com/profile_images/452052193198104577/cARTCYW__400x400.png',
-		'http://orthocoders.com/images/bdd_cycle.jpg'
+	var BASE_URL = 'http://31147849.ngrok.io'; // TODO: volver a generar el día del curso
+	vm.imageNames = [
+		'file1.png',
+		'file2.png',
+		'file3.png',
+		'file4.png'
 	];
-	vm.image;
-	vm.imageFromServer;
+	vm.image = undefined;
+	vm.imageFromServer = undefined;
+	vm.randomImage = undefined;
+	vm.fileName = "";
 
 	// public functions
 	vm.randomIntegerBetween = randomIntegerBetween;
 	vm.initImageWithRandomURL = initImageWithRandomURL;
 	vm.getImageFromServer = getImageFromServer;
 	vm.callJSONPromise = callJSONPromise;
+	vm.log = log;
 
 	// vm.getImageFromServer('file1.png');
 
@@ -37,23 +39,34 @@ angular.module('view1', ['ngRoute'])
 	}
 
 	function initImageWithRandomURL() {
-		console.log('entro');
-		var index = randomIntegerBetween(0, imageURLs.length - 1);
-		console.log(index);
-		vm.image = imageURLs[index];
+		var index = randomIntegerBetween(0, vm.imageNames.length - 1);
+		// vm.image = vm.imageNames[index];
+		// vm.getImageFromServer(vm.imageNames[index]);
+		vm.randomImage = makeURL(vm.imageNames[index])
 	}
 
 	function getImageFromServer(fileName) {
-		var URL = BASE_URL + '/api/v1/file/' + fileName;
-		$http({
-	        method: 'GET',
-	        url: URL
-	     }).success(function(data){
-	        console.log(data); // binary output
+		var URL = makeURL(fileName);
+		// $http({
+	 //        method: 'GET',
+	 //        url: URL
+	 //     }).success(function(data){
+	 //        vm.log(data); // binary output
+	 //        vm.imageFromServer = URL;
+	 //    }).error(function(){
+	 //        vm.log("error");
+	 //    });
+	    $http.get(URL)
+		.then(function(response) {
+			vm.log(response); // binary output
 	        vm.imageFromServer = URL;
-	    }).error(function(){
-	        console.log("error");
-	    });
+		})
+		.catch(function(response) {
+		  vm.log('Error: ', response.status, response.data);
+		})
+		.finally(function() {
+		  vm.log("Finished");
+		});
 	}
 
 	function callJSONPromise(passFailBoolean) {
@@ -72,6 +85,15 @@ angular.module('view1', ['ngRoute'])
 			deferred.reject(error);
 		}
 		return deferred.promise;
+	}
+
+	function makeURL(fileName) {
+		var result = BASE_URL + '/api/v1/file/' + fileName;
+		return result;
+	};
+
+	function log(message) {
+		console.log(message);
 	}
 
 }]);
