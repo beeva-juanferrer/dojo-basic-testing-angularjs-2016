@@ -1,12 +1,12 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'start' ]
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'test' ]
 2 info using npm@2.15.0
 3 info using node@v4.4.2
 4 verbose stack Error: ENOENT: no such file or directory, open '/Users/alvaro.delaserna/Desktop/Cursos/Dojo-AngularJS-Testing/dojo-basic-testing-angularjs-2016/package.json'
 4 verbose stack     at Error (native)
 5 verbose cwd /Users/alvaro.delaserna/Desktop/Cursos/Dojo-AngularJS-Testing/dojo-basic-testing-angularjs-2016
 6 error Darwin 15.2.0
-7 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "start"
+7 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "test"
 8 error node v4.4.2
 9 error npm  v2.15.0
 10 error path /Users/alvaro.delaserna/Desktop/Cursos/Dojo-AngularJS-Testing/dojo-basic-testing-angularjs-2016/package.json
