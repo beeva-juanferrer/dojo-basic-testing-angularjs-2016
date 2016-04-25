@@ -10,10 +10,10 @@ angular.module('view2', ['ngRoute'])
   });
 }])
 
-.controller('View2Ctrl', ['Service', '$q', '$timeout', function(Service, $q, $timeout) {
+.controller('View2Ctrl', ['ServiceOne', '$q', '$timeout', function(ServiceOne, $q, $timeout) {
 	var vm = this;
 	// Variables
-	var i = 1;
+	vm.i = 1;
     vm.state = undefined;
     vm.promise1 = undefined;
 	vm.promise2 = undefined;
@@ -23,9 +23,10 @@ angular.module('view2', ['ngRoute'])
 
     // functions
     vm.loop = loop;
+    vm.setServiceVariableAndPrintIt = setServiceVariableAndPrintIt;
 
     function loop() {
-    	if (i == 1) {
+    	if (vm.i == 1) {
 	    	vm.state = "Executing...";
 		    vm.promise1 = "Waiting for promise result";
 			vm.promise2 = "Waiting for promise result";
@@ -33,25 +34,31 @@ angular.module('view2', ['ngRoute'])
 			vm.promise4 = "Waiting for promise result";
 			vm.promise5 = "Waiting for promise result";
 		}
-    	var aux = 'promise' + i;
+    	var aux = 'promise' + vm.i;
     	vm[aux] = 'Waiting';
-		if (i > 5) {
+		if (vm.i > 5) {
 			vm.state = 'Done!';
-			i = 1;
+			vm.i = 1;
 			return;
 		} else {
 			var willSucceed = true;
-	    	if (i == 3) willSucceed = false;
-	    	Service.createPromise(willSucceed)
+	    	if (vm.i == 3) willSucceed = false;
+	    	ServiceOne.createPromise(willSucceed)
 	      		.then(function (result) {
 	      			vm[aux] = result;
-	      			i++;
+	      			vm.i++;
 	      			$timeout(loop, 1000);
 	      		}, function (error) {
 	      			vm[aux] = error;
-	      			i++;
+	      			vm.i++;
 	      			$timeout(loop, 1000);
 	      		});
 		}
+	}
+
+	function setServiceVariableAndPrintIt(val) {
+		ServiceOne.setVariable(val);
+		var result = ServiceOne.getVariable();
+		console.log(result);
 	}
 }]);

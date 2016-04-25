@@ -2,18 +2,18 @@
   'use strict';
 
   /**
-   * @ngdoc service
-   * @name myApp.factory:Service
+   * @ngdoc serviceOne
+   * @name myApp.factory:ServiceOne
    *
    * @description
    *
    */
   angular
     .module('myApp')
-    .factory('Service', Service);
+    .factory('ServiceOne', ServiceOne);
 
-  Service.$inject = ['$q', '$timeout'];
-  function Service($q, $timeout) {
+  ServiceOne.$inject = ['$q', '$timeout'];
+  function ServiceOne($q, $timeout) {
     var vm = this;
     vm.auxVariable = undefined;
 

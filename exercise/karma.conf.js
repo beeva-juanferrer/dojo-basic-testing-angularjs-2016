@@ -9,7 +9,8 @@ module.exports = function (config) {
             'app/bower_components/angular-mocks/angular-mocks.js',
             'app/components/**/*.js',
             'app/view*/**/*.js',
-            'test/**/*.js'
+            'test/**/*.js',
+            'app/app.js'
         ],
 
         autoWatch: true,
@@ -19,7 +20,8 @@ module.exports = function (config) {
         reporters: ['progress', 'coverage'],
 
         preprocessors: {
-            'app/view*/**/*.js': ['coverage']
+            'app/view*/**/*.js': ['coverage'],
+            'app/app.js': ['coverage']
         },
 
         coverageReporter: {
