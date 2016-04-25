@@ -64,8 +64,10 @@ angular.module('view1', ['ngRoute'])
 			message: 'Promise rejected'
 		};
 		if (passFailBoolean) {
+			vm.log(result);
 			deferred.resolve(result);
 		} else {
+			vm.log(error);
 			deferred.reject(error);
 		}
 		return deferred.promise;

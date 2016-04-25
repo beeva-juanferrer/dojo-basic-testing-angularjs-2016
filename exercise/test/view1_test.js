@@ -2,7 +2,7 @@
 
 describe('Controller: View1Ctrl', function () {
 
-	var $httpBackend, $q, $scope, View1Ctrl;
+	var $httpBackend, $q, $scope, View1Ctrl, deferred;
 
 	beforeEach(function () {
 		module('view1');
@@ -63,9 +63,6 @@ describe('Controller: View1Ctrl', function () {
 	});
 
 	describe('get image from server', function () {
-//		beforeEach(function () {
-//			View1Ctrl.imageFromServer = undefined;
-//		});
 
 		afterEach(function() {
 			$httpBackend.verifyNoOutstandingExpectation();
@@ -103,6 +100,40 @@ describe('Controller: View1Ctrl', function () {
 
 			expect(View1Ctrl.log).toHaveBeenCalled();
 			expect(View1Ctrl.imageFromServer).not.toBeDefined();
+		}));
+	});
+
+	describe('call promise', function () {
+
+		beforeEach(function() {
+			deferred = $q.defer();
+			spyOn(View1Ctrl, 'log');
+		});
+		
+		it('should resolve promise', inject(function () {
+			var result = {
+				statusCode: 200,
+				message: 'Promise resolved'
+			};
+			
+			View1Ctrl.callJSONPromise(true);
+
+			$scope.$digest();
+
+			expect(View1Ctrl.log).toHaveBeenCalledWith(result);
+		}));
+
+		it('should reject promise', inject(function () {
+			var error = {
+				statusCode: 500,
+				message: 'Promise rejected'
+			};
+
+			View1Ctrl.callJSONPromise(false);
+
+			$scope.$digest();
+
+			expect(View1Ctrl.log).toHaveBeenCalledWith(error);
 		}));
 	});
 
