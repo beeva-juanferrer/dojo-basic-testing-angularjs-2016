@@ -27,7 +27,7 @@ describe('Controller: View1Ctrl', function () {
 
 			View1Ctrl.initImageWithRandomURL();
 			
-			expect(View1Ctrl.randomIntegerBetween).toHaveBeenCalled();
+			expect(View1Ctrl.randomIntegerBetween).toHaveBeenCalledWith(0,3);
 		});
 	});
 });

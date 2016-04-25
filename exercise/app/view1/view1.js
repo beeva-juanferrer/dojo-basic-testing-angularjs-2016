@@ -30,6 +30,7 @@ angular.module('view1', ['ngRoute'])
 	vm.initImageWithRandomURL = initImageWithRandomURL;
 	vm.getImageFromServer = getImageFromServer;
 	vm.callJSONPromise = callJSONPromise;
+	vm.makeURL = makeURL;
 	vm.log = log;
 
 	// vm.getImageFromServer('file1.png');
@@ -40,11 +41,11 @@ angular.module('view1', ['ngRoute'])
 
 	function initImageWithRandomURL() {
 		var index = vm.randomIntegerBetween(0, vm.imageNames.length - 1);
-		vm.randomImage = makeURL(vm.imageNames[index])
+		vm.randomImage = vm.makeURL(vm.imageNames[index])
 	}
 
 	function getImageFromServer(fileName) {
-		var URL = makeURL(fileName);
+		var URL = vm.makeURL(fileName);
 	    $http.get(URL)
 		.then(function(response) {
 			vm.log(response); // binary output
