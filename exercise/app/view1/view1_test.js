@@ -8,7 +8,7 @@ describe('Controller: View1Ctrl', function () {
 		module('view1');
 
 		inject(function ($controller, _$rootScope_,	_$http_, _$q_) {
-			$scope = _$rootScope_.$new();
+            $scope = _$rootScope_.$new();
 			$q = _$q_;
 			$http = _$http_;
 
@@ -24,11 +24,9 @@ describe('Controller: View1Ctrl', function () {
 	describe('initImageWithRandomURL', function() {
 		it('should initialize vm.randomImage with a random image from the list', function () {
 			spyOn(View1Ctrl, 'randomIntegerBetween');
-			spyOn(View1Ctrl, 'initImageWithRandomURL');
 
 			View1Ctrl.initImageWithRandomURL();
 			
-			expect(View1Ctrl.initImageWithRandomURL).toHaveBeenCalled();
 			expect(View1Ctrl.randomIntegerBetween).toHaveBeenCalled();
 		});
 	});

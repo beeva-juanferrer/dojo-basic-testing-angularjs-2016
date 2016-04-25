@@ -15,6 +15,17 @@ module.exports = function (config) {
 
         frameworks: ['jasmine'],
 
+        reporters: ['coverage'],
+
+        preprocessors: {
+            'app/view*/**/*.js': ['coverage']
+        },
+
+        coverageReporter: {
+            type: 'html',
+            dir: 'coverage/'
+        },
+
         browsers: ['PhantomJS'],
 
         // plugins: [
@@ -27,7 +38,8 @@ module.exports = function (config) {
         junitReporter: {
             outputFile: 'test_out/unit.xml',
             suite: 'unit'
-        }
+        },
 
+        singleRun: true
     });
 };

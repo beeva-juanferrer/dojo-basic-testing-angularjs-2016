@@ -79,7 +79,7 @@ angular.module('view1', ['ngRoute'])
 	function makeURL(fileName) {
 		var result = BASE_URL + '/api/v1/file/' + fileName;
 		return result;
-	};
+	}
 
 	function log(message) {
 		console.log(message);
