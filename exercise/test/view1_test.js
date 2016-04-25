@@ -21,6 +21,17 @@ describe('Controller: View1Ctrl', function () {
 
 	});
 
+	describe('log', function () {
+		it('should call console.log()', function () {
+			var message = '';
+			spyOn(console, 'log');
+
+			View1Ctrl.log(message);
+
+			expect(console.log).toHaveBeenCalledWith(message);
+		});
+	});
+
 	describe('random integer', function () {
 		it('should return an Int between two values', function () {
 			var min = 1, max = 5;
