@@ -33,8 +33,6 @@ angular.module('view1', ['ngRoute'])
 	vm.makeURL = makeURL;
 	vm.log = log;
 
-	// vm.getImageFromServer('file1.png');
-
 	function randomIntegerBetween(min, max) {
 		return Math.floor(Math.random() * (max - min)) + min;
 	}
@@ -50,12 +48,8 @@ angular.module('view1', ['ngRoute'])
 		.then(function(response) {
 			vm.log(response); // binary output
 	        vm.imageFromServer = URL;
-		})
-		.catch(function(response) {
-		  vm.log('Error: ', response.status, response.data);
-		})
-		.finally(function() {
-		  vm.log("Finished");
+		}, function(error) {
+			vm.log(error);
 		});
 	}
 

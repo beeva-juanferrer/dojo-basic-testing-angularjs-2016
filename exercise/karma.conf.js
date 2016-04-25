@@ -16,7 +16,7 @@ module.exports = function (config) {
 
         frameworks: ['jasmine'],
 
-        reporters: ['coverage'],
+        reporters: ['progress', 'coverage'],
 
         preprocessors: {
             'app/view*/**/*.js': ['coverage']
