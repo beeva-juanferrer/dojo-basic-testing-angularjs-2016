@@ -46,8 +46,18 @@ angular.module('view2', ['ngRoute'])
 	    	ServiceOne.createPromise(willSucceed)
 	      		.then(function (result) {
 	      			vm[aux] = result;
-	      			vm.i++;
+	      			
+	      			$timeout(function () {
+	      				if(vm.i % 2 == 0) {
+	      					console.log('index is even: ', vm.i);
+	      				}else {
+	      					console.log('index is odd: ', vm.i);
+	      				}
+	      				vm.i++;
+	      			}, 100);
+	      			
 	      			$timeout(loop, 1000);
+
 	      		}, function (error) {
 	      			vm[aux] = error;
 	      			vm.i++;

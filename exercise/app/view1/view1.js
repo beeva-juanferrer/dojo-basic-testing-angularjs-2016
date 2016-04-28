@@ -13,7 +13,7 @@ angular.module('view1', ['ngRoute'])
 .controller('View1Ctrl', ['$http', '$q', function($http, $q) {
 	// variable declaration
 	var vm = this;
-	var BASE_URL = 'http://31147849.ngrok.io'; // TODO: volver a generar el día del curso
+	var BASE_URL = 'http://ca2290ce.ngrok.io'; // TODO: volver a generar el día del curso
 	vm.imageNames = [
 		'file1.png',
 		'file2.png',
@@ -39,7 +39,7 @@ angular.module('view1', ['ngRoute'])
 
 	function initImageWithRandomURL() {
 		var index = vm.randomIntegerBetween(0, vm.imageNames.length - 1);
-		vm.randomImage = vm.makeURL(vm.imageNames[index])
+		vm.randomImage = vm.makeURL(vm.imageNames[index]);
 	}
 
 	function getImageFromServer(fileName) {
