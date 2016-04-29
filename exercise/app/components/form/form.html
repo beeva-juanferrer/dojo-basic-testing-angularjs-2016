@@ -1,0 +1,15 @@
+    <ng-form name="form">
+        <fieldset>
+            <legend>{{formName}}</legend>
+
+            <div ng-repeat="field in fields">
+                <label for="{{field.id}}">{{field.label}}</label>
+                <input id="{{field.id}}" name="{{field.name}}" ng-model="field.model" type="{{field.type}}"
+                       ng-disabled="disabled"/>
+            </div>
+            <br/>
+
+            <button ng-click="close()">Close</button>
+            <button ng-if="actionLabel" ng-click="action()">{{actionLabel}}</button>
+        </fieldset>
+    </ng-form>

@@ -1,0 +1,24 @@
+<div ng-init="initialize()">
+
+    <div ng-if="currentMode">
+        <generic-form fields="userFields" action="actionUser()" mode="currentMode"></generic-form>
+    </div>
+    <br/>
+
+    <div ng-if="users.length">
+        <div ng-repeat="user in users">
+            <a href="#/users" ng-click="showForm(SHOW, $index)">
+                <strong>User {{$index}}</strong>
+            </a>:
+            {{user.getName()}} {{user.getSurname()}} |
+            <a href="#/users" ng-click="showForm(UPDATE, $index)">Edit</a> - <a href="#/users" ng-click="deleteUser($index)">Delete</a>
+        </div>
+    </div>
+    <br/>
+
+    <div>
+        <button ng-show="currentMode !== CREATE" ng-click="showForm(CREATE)">Create</button>
+    </div>
+
+</div>
+<br/>
