@@ -7,6 +7,7 @@ module.exports = function (config) {
             'app/bower_components/angular/angular.js',
             'app/bower_components/angular-mocks/angular-mocks.js',
             'app/bower_components/angular-route/angular-route.js',
+            'app/bower_components/lodash/lodash.js',
             'app/*.js',
             'app/components/**/*.js',
             'app/view*/**/*.js',
@@ -26,14 +27,12 @@ module.exports = function (config) {
         preprocessors: {
             'app/*.html': ['html2js'],
             'app/{components,users,view*}/**/*.html': ['ng-html2js'],
-            'app/{view*,users}/**/*.js': ['coverage']
+            'app/{components,view*,users}/**/*.js': ['coverage']
         },
 
         ngHtml2JsPreprocessor: {
             stripPrefix: 'app/',
             moduleName: function (htmlPath, originalPath) {
-                console.log(htmlPath);
-                console.log(originalPath);
                 return htmlPath.split('/')[0];
             }
         },

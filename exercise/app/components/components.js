@@ -1,5 +1,5 @@
 'use strict';
 
-angular.module('myApp.components', [
-  'myApp.components.form'
+angular.module('components', [
+  'components.form'
 ]);

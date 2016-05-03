@@ -1,13 +1,12 @@
 'use strict';
 
 angular
-    .module('myApp.components.form', [])
+    .module('components.form', [])
     .directive('genericForm', [
         function () {
             return {
                 restrict: 'EA',
                 templateUrl: 'components/form/form.html',
-                // require: '^userForm',
                 scope: {
                     fields: '=',
                     action: '&',
@@ -30,6 +29,15 @@ angular
                             scope.actionLabel = undefined;
                         }
                     });
+
+                    scope.doAction = function (form) {
+                        for (var field = 0; field < scope.fields.length; field++) {
+                            form[scope.fields[field].name].$dirty = true;
+                        }
+                        if (form.$valid) {
+                            scope.action();
+                        }
+                    };
 
                     scope.close = function () {
                         scope.$parent.$parent.initialize();

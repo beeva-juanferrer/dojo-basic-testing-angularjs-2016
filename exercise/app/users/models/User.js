@@ -3,6 +3,7 @@
 angular
     .module('users')
     .service('User', [
+        /* istanbul ignore next */
         function () {
             return function (userName, userSurname, userBirthday, userEmail) {
                 var name = userName;

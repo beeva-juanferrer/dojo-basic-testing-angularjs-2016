@@ -5,11 +5,12 @@
             <div ng-repeat="field in fields">
                 <label for="{{field.id}}">{{field.label}}</label>
                 <input id="{{field.id}}" name="{{field.name}}" ng-model="field.model" type="{{field.type}}"
-                       ng-disabled="disabled"/>
+                       ng-disabled="disabled" ng-required="field.required"/>
+                <span ng-if="form[field.name].$dirty && form[field.name].$invalid">Error en campo!</span>
             </div>
             <br/>
 
             <button ng-click="close()">Close</button>
-            <button ng-if="actionLabel" ng-click="action()">{{actionLabel}}</button>
+            <button ng-if="actionLabel" ng-click="doAction(form)">{{actionLabel}}</button>
         </fieldset>
     </ng-form>

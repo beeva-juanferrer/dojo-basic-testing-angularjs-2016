@@ -21,13 +21,15 @@ angular
                                 id: 'name',
                                 name: 'userName',
                                 label: 'Name',
-                                model: ''
+                                model: '',
+                                required: true
                             },
                             {
                                 id: 'surname',
                                 name: 'userSurname',
                                 label: 'Surname',
-                                model: ''
+                                model: '',
+                                required: true
                             },
                             {
                                 id: 'birthday',
@@ -68,13 +70,17 @@ angular
                             scope.initialize();
                             console.log('user created!');
                         } else if (scope.currentMode === scope.UPDATE) {
-                            for (index = 0; index < scope.userFields.length; index++) {
-                                scope.currentUser['set' + scope.userFields[index].id.charAt(0).toUpperCase() + scope.userFields[index].id.slice(1)](scope.userFields[index].model);
+                            if (scope.currentUser) {
+                                for (index = 0; index < scope.userFields.length; index++) {
+                                    scope.currentUser['set' + scope.userFields[index].id.charAt(0).toUpperCase() + scope.userFields[index].id.slice(1)](scope.userFields[index].model);
+                                }
+                                scope.initialize();
+                                console.log('user update!');
+                            } else {
+                                console.error('cannot update the user because is missing');
                             }
-                            scope.initialize();
-                            console.log('user update!');
                         } else {
-                            console.log('showing user');
+                            console.log('nothing to do');
                         }
                     };
 

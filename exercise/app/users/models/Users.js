@@ -22,6 +22,7 @@ angular
             var users = new Users();
 
             return {
+                _users: users,
                 getList: users.getList,
                 add: function (user) {
                     if (user instanceof User) {
@@ -31,7 +32,11 @@ angular
                     }
                 },
                 remove: function (index) {
-                    users.getList().splice(index, 1);
+                    if (users.getList()[index]) {
+                        users.getList().splice(index, 1);
+                    } else {
+                        console.error('user does not exist');
+                    }
                 },
                 find: function (user) {
                     return _.find(users.getList(), user);
