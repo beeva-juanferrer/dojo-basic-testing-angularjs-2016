@@ -28,6 +28,18 @@ angular
                                 name: 'userSurname',
                                 label: 'Surname',
                                 model: ''
+                            },
+                            {
+                                id: 'birthday',
+                                name: 'userBirthday',
+                                label: 'Birthday',
+                                model: ''
+                            },
+                            {
+                                id: 'email',
+                                name: 'userEmail',
+                                label: 'Email',
+                                model: ''
                             }
                         ];
                         scope.currentMode = undefined;
@@ -36,8 +48,9 @@ angular
                     scope.showForm = function (mode, index) {
                         if (index !== undefined) {
                             scope.currentUser = scope.users[index];
-                            scope.userFields[0].model = scope.users[index].getName();
-                            scope.userFields[1].model = scope.users[index].getSurname();
+                            for (var field = 0; field < scope.userFields.length; field++) {
+                                scope.userFields[field].model = scope.currentUser['get' + scope.userFields[field].id.charAt(0).toUpperCase() + scope.userFields[field].id.slice(1)]();
+                            }
                         } else {
                             scope.initialize();
                         }
@@ -45,16 +58,17 @@ angular
                     };
 
                     scope.actionUser = function () {
+                        var index;
                         if (scope.currentMode === scope.CREATE) {
                             var user = new User();
-                            for (var index = 0; index < scope.userFields.length; index ++) {
+                            for (index = 0; index < scope.userFields.length; index++) {
                                 user['set' + scope.userFields[index].id.charAt(0).toUpperCase() + scope.userFields[index].id.slice(1)](scope.userFields[index].model);
                             }
                             Users.add(user);
                             scope.initialize();
                             console.log('user created!');
                         } else if (scope.currentMode === scope.UPDATE) {
-                            for (var index = 0; index < scope.userFields.length; index ++) {
+                            for (index = 0; index < scope.userFields.length; index++) {
                                 scope.currentUser['set' + scope.userFields[index].id.charAt(0).toUpperCase() + scope.userFields[index].id.slice(1)](scope.userFields[index].model);
                             }
                             scope.initialize();
@@ -69,6 +83,8 @@ angular
                         scope.initialize();
                         console.log('user delete!');
                     };
+
+                    scope.initialize();
                 }
             };
         }

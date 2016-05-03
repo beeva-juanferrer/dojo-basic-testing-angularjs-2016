@@ -4,11 +4,11 @@ angular
     .module('users')
     .service('User', [
         function () {
-            return function (userName, userSurname, userBirthday, userAddress) {
+            return function (userName, userSurname, userBirthday, userEmail) {
                 var name = userName;
                 var surname = userSurname;
                 var birthday = userBirthday;
-                var address = userAddress;
+                var email = userEmail;
 
                 /* istanbul ignore next */
                 this.getName = function () {
@@ -41,13 +41,13 @@ angular
                 };
 
                 /* istanbul ignore next */
-                this.getAddress = function () {
-                    return address;
+                this.getEmail = function () {
+                    return email;
                 };
 
                 /* istanbul ignore next */
-                this.setAddress = function (userAddress) {
-                    address = userAddress;
+                this.setEmail = function (userEmail) {
+                    email = userEmail;
                 };
             };
         }]
