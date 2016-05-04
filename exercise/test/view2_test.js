@@ -122,7 +122,7 @@ describe('Controller: View2Ctrl', function () {
 		it('should set the variable and print it', function () {
 			View2Ctrl.setServiceVariableAndPrintIt(VALUE);
 
-			expect(ServiceOne.setVariable).toHaveBeenCalledWith(VALUE);
+			expect(ServiceOne.setVariable).toHaveBeenCalledWith(VALUE); // getter & setter do not need to be tested, they are trivial cases
 			expect(ServiceOne.getVariable).toHaveBeenCalled();
 			expect(console.log).toHaveBeenCalledWith(VALUE);
 		});

@@ -38,9 +38,9 @@ describe('Controller: View1Ctrl', function () {
 			var result = View1Ctrl.randomIntegerBetween(min, max);
 
 			expect(result >= min).toBeTruthy();
-			// expect(result).toBeGreaterThan(min);
+			expect(result).toBeGreaterThan(0);
 			expect(result <= max).toBeTruthy();
-			// expect(result).toBeLessThan(max);
+			expect(result).toBeLessThan(6);
 		});
 	});
 
