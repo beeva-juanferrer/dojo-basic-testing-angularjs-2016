@@ -47,7 +47,7 @@ describe('Controller: View1Ctrl', function () {
 	describe('make URL', function () {
 		it('should generate a URL using the function parameter', function () {
 			var result = View1Ctrl.makeURL('foo');
-			expect(result).toEqual('http://ca2290ce.ngrok.io/api/v1/file/foo');
+			expect(result).toEqual('http://31acf40c.ngrok.io/api/v1/file/foo');
 		});
 	});
 
@@ -73,7 +73,7 @@ describe('Controller: View1Ctrl', function () {
 			expect(View1Ctrl.randomIntegerBetween).toHaveBeenCalledWith(0,3);
 			expect(View1Ctrl.makeURL).toHaveBeenCalledWith('file3.png');
 			expect(View1Ctrl.randomImage).toBeDefined();
-			expect(View1Ctrl.randomImage).toEqual('http://ca2290ce.ngrok.io/api/v1/file/file3.png');
+			expect(View1Ctrl.randomImage).toEqual('http://31acf40c.ngrok.io/api/v1/file/file3.png');
 		});
 	});
 
@@ -93,7 +93,7 @@ describe('Controller: View1Ctrl', function () {
 			
 			expect(View1Ctrl.imageFromServer).not.toBeDefined();
 			
-			$httpBackend.expectGET('http://ca2290ce.ngrok.io/api/v1/file/file1.png').respond(200, response);
+			$httpBackend.expectGET('http://31acf40c.ngrok.io/api/v1/file/file1.png').respond(200, response);
 
 			View1Ctrl.getImageFromServer(name);
 
@@ -101,7 +101,7 @@ describe('Controller: View1Ctrl', function () {
 
 			expect(View1Ctrl.log).toHaveBeenCalled();
 			expect(View1Ctrl.imageFromServer).toBeDefined();
-			expect(View1Ctrl.imageFromServer).toEqual('http://ca2290ce.ngrok.io/api/v1/file/file1.png');
+			expect(View1Ctrl.imageFromServer).toEqual('http://31acf40c.ngrok.io/api/v1/file/file1.png');
 		}));
 
 		it('should fail to get image from url', inject(function () {
@@ -109,7 +109,7 @@ describe('Controller: View1Ctrl', function () {
 			
 			expect(View1Ctrl.imageFromServer).not.toBeDefined();
 			
-			$httpBackend.expectGET('http://ca2290ce.ngrok.io/api/v1/file/file1.png').respond(404, response);
+			$httpBackend.expectGET('http://31acf40c.ngrok.io/api/v1/file/file1.png').respond(404, response);
 
 			View1Ctrl.getImageFromServer(name);
 
